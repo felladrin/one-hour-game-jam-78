@@ -1,0 +1,30 @@
+<!doctype html>
+<html ng-app="game">
+<head>
+    <script src="js/angular.min.js"></script>
+    <script src="js/game.js"></script>
+</head>
+<body>
+<h2>One Day In Life Of A Lime Trader</h2>
+
+<h3>Instructions:</h3>
+<p>You have until 8PM to sell the maximum limes you can.</p>
+<p>The day starts when you sell your first lime.</p>
+<p>Try to not let consumers waiting on the with the payment. Get it as soon as possible, or they'll get unsatisfied.</p>
+
+<h3>Play:</h3>
+<div ng-controller="GameController" style="min-width: 450px;">
+    <div style="float: right;">
+        <div ng-repeat="consumerId in paymentsToReceive">
+            <input type="button" ng-click="receivePayment($index)" value="Receive payment from consumer #{{consumerId}}"/>
+        </div>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <input type="button" ng-click="sellLime()" value="Deliver Lime"/>
+    </div>
+    <div>Current Time: {{stats.currentHour}}:{{(stats.currentMinute < 10) ? '0' + stats.currentMinute : stats.currentMinute}}</div>
+    <div>Limes Sold: {{stats.limesSold}}</div>
+    <div>Consumers Satisfaction: {{stats.consumerSatisfaction}}</div>
+</div>
+</body>
+</html>
