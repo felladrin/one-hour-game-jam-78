@@ -43,10 +43,6 @@ angular.module('game', [])
         decreaseConsumerSatisfaction();
 
         $scope.sellLime = function () {
-            if (!$scope.isRunning) {
-                $scope.isRunning = true;
-            }
-
             $scope.stats.limesSold++;
             $scope.stats.consumerSatisfaction++;
             $scope.paymentsToReceive.push(angular.copy($scope.stats.limesSold));
@@ -55,4 +51,13 @@ angular.module('game', [])
         $scope.receivePayment = function (index) {
             $scope.paymentsToReceive.splice(index, 1);
         };
+
+        $scope.start = function () {
+            $scope.stats.limesSold = 0;
+            $scope.stats.consumerSatisfaction = 0;
+            $scope.stats.currentHour = 5;
+            $scope.stats.currentMinute = 0;
+            $scope.isRunning = true;
+            $scope.paymentsToReceive = [];
+        }
     });
