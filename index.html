@@ -1,37 +1,41 @@
 <!doctype html>
 <html ng-app="game">
 <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Mini-game made with AngularJS for the 78th One Hour Game Jam and the VanHackathon browser-based game challenge.">
+    <meta name="author" content="Victor Nogueira">
+    <title>One Day In Life Of A Lime Trader</title>
+    <link href="https://fonts.googleapis.com/css?family=Gentium+Basic" rel="stylesheet">
+    <style>body { font-family: 'Gentium Basic', serif; }</style>
     <script src="js/angular.min.js"></script>
     <script src="js/game.js"></script>
 </head>
 <body>
-<h2>One Day In Life Of A Lime Trader</h2>
-
-<h3>Instructions:</h3>
-<p>
-    You are a lime trader and you've just arrived in the market.<br/>
-    You have until 8PM to sell the maximum limes you can.<br/>
-    Don't let consumers waiting on the queue with the payment.<br/>
-    Get it as soon as possible or they'll get unsatisfied.
-</p>
-
-<h3>Play:</h3>
-<div ng-controller="GameController" style="width: 450px;">
-    <input type="button" ng-hide="isRunning" ng-click="start()" value="Press to Start"/>
-    <div ng-show="isRunning">
-        <div style="float: right;">
-            <div ng-repeat="consumerId in paymentsToReceive">
-                <input type="button" ng-click="receivePayment($index)" value="Receive payment from consumer #{{consumerId}}"/>
+    <h2>One Day In Life Of A Lime Trader</h2>
+    <h3>Instructions:</h3>
+    <p>
+        You are a lime trader and you've just arrived in the market.<br/>
+        You have until 8PM to sell the maximum limes you can.<br/>
+        Don't let consumers waiting in the queue with the payment.<br/>
+        Get it as soon as possible or they'll get unsatisfied.
+    </p>
+    <h3>Play:</h3>
+    <div ng-controller="GameController" style="width: 450px;">
+        <input type="button" ng-hide="isRunning" ng-click="start()" value="Press to Start"/>
+        <div ng-show="isRunning">
+            <div style="float: right;">
+                <div ng-repeat="consumerId in paymentsToReceive">
+                    <input type="button" ng-click="receivePayment($index)" value="Receive payment from consumer #{{consumerId}}"/>
+                </div>
             </div>
+            <div style="margin-bottom: 10px;">
+                <input type="button" ng-click="sellLime()" value="Sell Lime"/>
+            </div>
+            <div>Current Time: <strong>{{stats.currentHour}}:{{(stats.currentMinute < 10) ? '0' + stats.currentMinute : stats.currentMinute}}</strong></div>
+            <div>Limes Sold: <strong>{{stats.limesSold}}</strong></div>
+            <div>Consumers Satisfaction: <strong>{{stats.consumerSatisfaction}}</strong></div>
         </div>
-        <div style="margin-bottom: 10px;">
-            <input type="button" ng-click="sellLime()" value="Deliver Lime"/>
-        </div>
-        <div>Current Time: {{stats.currentHour}}:{{(stats.currentMinute < 10) ? '0' + stats.currentMinute : stats.currentMinute}}</div>
-        <div>Limes Sold: {{stats.limesSold}}</div>
-        <div>Consumers Satisfaction: {{stats.consumerSatisfaction}}</div>
+        <footer style="position: absolute; bottom: 10px; left: 10px; z-index: -1;">Game by <a href="https://github.com/felladrin" target="_blank">Felladrin</a>. Fork this on <a href="https://github.com/felladrin/one-hour-game-jam-78" target="_blank">GitHub</a>!</footer>
     </div>
-    <footer style="position: absolute; bottom: 10px; left: 10px; z-index: -1;">Game by <a href="https://github.com/felladrin" target="_blank">Felladrin</a>. Fork me on <a href="https://github.com/felladrin/one-hour-game-jam-78" target="_blank">GitHub</a>!</footer>
-</div>
 </body>
 </html>
